@@ -1,9 +1,41 @@
 import './App.css'
+import NavBar from './components/NavBar'
+import Home from './pages/Home'
+import { Routes, Route } from 'react-router-dom'
+import { CheckSession } from './services/Auth'
+import { useState, useEffect } from 'react'
 
 function App() {
+  const [user, setUser] = useState(null)
+
+  const checkToken = async () => {
+    const user = await CheckSession()
+    setUser(user)
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+
+    if (token) {
+      checkToken()
+    }
+  }, [])
+
+  const handleLogout = () => {
+    setUser(null)
+    localStorage.clear()
+  }
+
   return (
     <div className="App">
-      <h1>Ello</h1>
+      <NavBar user={user} handleLogout={handleLogout} />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home user={user} setUser={setUser} />} />
+          <Route />
+          <Route />
+        </Routes>
+      </main>
     </div>
   )
 }
