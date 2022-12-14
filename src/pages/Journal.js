@@ -19,7 +19,7 @@ const Journal = ({ user }) => {
   return (
     <div>
       <h1>{journal && journal.title}</h1>
-      <Page pages={journal.pages} />
+      {journal && <Page pages={journal.pages} />}
     </div>
   )
 }
