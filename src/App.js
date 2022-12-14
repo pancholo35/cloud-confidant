@@ -1,6 +1,8 @@
 import './App.css'
 import NavBar from './components/NavBar'
 import Home from './pages/Home'
+import Register from './pages/Register'
+import SignIn from './pages/SignIn'
 import { Routes, Route } from 'react-router-dom'
 import { CheckSession } from './services/Auth'
 import { useState, useEffect } from 'react'
@@ -32,8 +34,16 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home user={user} setUser={setUser} />} />
-          <Route />
-          <Route />
+          <Route path="/register" element={<Register />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route
+            path={`/${user.username}/journal/:journal_id`}
+            element={<Journal user={user} />}
+          />
+          <Route
+            path={`/${user.username}/profile`}
+            element={<Profile user={user} />}
+          />
         </Routes>
       </main>
     </div>
