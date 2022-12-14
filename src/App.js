@@ -35,7 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home user={user} setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route
             path={`/${user.username}/journal/:journal_id`}
             element={<Journal user={user} />}

@@ -30,7 +30,7 @@ const Register = () => {
 
   return (
     <div>
-      <form className="col" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="username">Username </label>
         <input
           onChange={handleChange}
@@ -58,7 +58,7 @@ const Register = () => {
           value={formState.password}
           required
         />
-        <button id="register-button">Register</button>
+        <button>Register</button>
       </form>
     </div>
   )
