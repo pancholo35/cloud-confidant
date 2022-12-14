@@ -1,12 +1,14 @@
-import SignIn from './SignIn'
+import JournalCard from '../components/JournalCard'
 
-const Home = ({ user, setUser }) => {
+const Home = ({ user }) => {
   return user ? (
     <div>
-      <div>Home</div>
+      {user.journals.map((journal) => (
+        <JournalCard key={journal.id} user={user} journal={journal} />
+      ))}
     </div>
   ) : (
-    <SignIn setUser={setUser} />
+    <h1>Please Sign In</h1>
   )
 }
 

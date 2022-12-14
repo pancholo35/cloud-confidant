@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { SignInUser } from '../services/Auth'
+import { GetUser } from '../services/UserServices'
 
-const SignIn = () => {
+const SignIn = ({ setUser }) => {
   let navigate = useNavigate()
 
   const startState = {
@@ -20,7 +21,8 @@ const SignIn = () => {
     e.preventDefault()
     const payload = await SignInUser(formState)
     if (payload) {
-      await setUser(payload)
+      const user = await GetUser(payload.id)
+      user && setUser(user)
       setFormState(startState)
       navigate('/')
     } else {

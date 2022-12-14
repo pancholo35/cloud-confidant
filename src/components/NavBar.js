@@ -1,34 +1,34 @@
 import { Link } from 'react-router-dom'
 
-const NavBar = () => {
+const NavBar = ({ user, handleLogout }) => {
   let authenticatedOptions
 
   if (user) {
     authenticatedOptions = (
-      <nav className="flex-row nav-links">
+      <div id="nav-link">
         <Link to="/">Home</Link>
-        <Link to={`${user.username}/profile`}>Profile</Link>
+        <Link to={`/profile/${user.username}`}>Profile</Link>
         <Link onClick={handleLogout} to="/">
           Sign Out
         </Link>
-      </nav>
+      </div>
     )
   }
 
   const publicOptions = (
-    <nav className="flex-row nav-links">
+    <div id="nav-link">
       <Link to="/register">Register</Link>
       <Link to="/signin">Sign In</Link>
-    </nav>
+    </div>
   )
 
   return (
     <header>
-      <nav>
+      <nav className="flex-row nav">
         <div>
           <h1>Cloud Confidant</h1>
         </div>
-        <div>{user ? authenticatedOptions : publicOptions}</div>
+        {user ? authenticatedOptions : publicOptions}
       </nav>
     </header>
   )
