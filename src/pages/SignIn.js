@@ -33,7 +33,7 @@ const SignIn = ({ setUser }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="flex-col singin-form" onSubmit={handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
           onChange={handleChange}
@@ -52,7 +52,7 @@ const SignIn = ({ setUser }) => {
           value={formState.password}
           required
         />
-        <button id="login-btn">Sign in!</button>
+        <button>Sign In</button>
       </form>
       <div>
         <p>New user?</p>

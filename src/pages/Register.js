@@ -30,7 +30,7 @@ const Register = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form className="flex-col" onSubmit={handleSubmit}>
         <label htmlFor="username">Username </label>
         <input
           onChange={handleChange}
@@ -60,6 +60,10 @@ const Register = () => {
         />
         <button>Register</button>
       </form>
+      <p>Already registerd?</p>
+      <button type="button" onClick={() => navigate('/signin')}>
+        Sign In
+      </button>
     </div>
   )
 }

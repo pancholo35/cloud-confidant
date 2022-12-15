@@ -68,7 +68,7 @@ const Page = ({ pages }) => {
   }
 
   return pages.length > 0 ? (
-    <div>
+    <div className="flex-col page-content">
       <div className="flex-row">
         <h3>{pages[pageNumber - 1].title}</h3>
         <button type="button" onClick={handleEdit}>

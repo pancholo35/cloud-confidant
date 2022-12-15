@@ -2,18 +2,6 @@
   text-align: center;
 }
 
-.card {
-  border: 2px solid black;
-  border-radius: 5px;
-  max-width: 160px;
-  min-width: 160px;
-  margin: 3px;
-}
-
-.journal-card {
-  flex-wrap: wrap;
-}
-
 .flex-row {
   display: flex;
   justify-content: space-evenly;
@@ -25,10 +13,46 @@
   align-items: center;
 }
 
+.journal-card {
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.card {
+  padding-top: 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  max-width: 160px;
+  min-width: 160px;
+  max-height: 230px;
+  margin: 3px;
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.vectordiary.com%2Fspecial-effects%2F013-leather-textured-diary%2Fleather-textured-diary.jpg&f=1&nofb=1&ipt=8d0a10fde30f2de5b4c6b82040cef87be4f31c84597b963d723ac7a00b3dafac&ipo=images');
+  background-size: cover;
+  background-position: center;
+  color: gold;
+}
+.card:hover {
+  opacity: 0.6;
+}
+
+.grey {
+  opacity: 0.6;
+}
+.grey:hover {
+  opacity: 1;
+}
+
 .page-content {
-  margin-left: 0;
-  align-items: center;
-  max-width: fit-content;
+  margin-left: 10px;
+  justify-content: left;
+  width: 50vw;
+  background-color: rgb(164, 235, 243, 0.6);
+  border-radius: 5px;
+}
+
+.journal-content {
+  justify-content: left;
+  align-items: flex-start;
 }
 
 .page-form {
@@ -49,7 +73,7 @@
   align-items: center;
 
   padding: 0 5px 0 5px;
-  background-color: whitesmoke;
+  background-color: #f4f9f9;
 }
 
 a {
@@ -57,13 +81,9 @@ a {
   text-decoration: none;
 }
 
-.flex-row.button {
-  max-height: fit-content;
-}
-
 #nav-link {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 
   min-width: 200px;
 }

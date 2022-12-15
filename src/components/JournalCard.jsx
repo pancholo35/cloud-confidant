@@ -5,7 +5,7 @@ const JournalCard = ({ user, journal }) => {
 
   return (
     <div
-      className="card"
+      className="flex-col card"
       onClick={() => navigate(`/journal/${journal.id}/${user.username}`)}
     >
       <h1>{journal.title}</h1>

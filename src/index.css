@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi1.wp.com%2Fwww.fpdorchak.com%2Fwp-content%2Fuploads%2F2016%2F08%2Fimg_1762.jpg&f=1&nofb=1&ipt=fa60e054b86d3e378f3f9bd7426d3216aa0e5f8f0327e4ca53de09f28680bfd1&ipo=images');
+  background-size: cover;
 }
 
 code {
