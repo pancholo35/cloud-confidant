@@ -31,8 +31,6 @@
 
 ##### A Trello board was used to keep track of development progress and can be viewed [here](https://trello.com/b/9ZexW0qV/cloud-confidant).
 
-##### The project itself was deployed and can be viewed [here](URL).
-
 ---
 
 ### **_Screenshots_**
