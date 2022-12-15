@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { CreatePage } from '../services/PageServices'
+import { CreatePage, UpdatePage } from '../services/PageServices'
 
 const Page = ({ pages }) => {
   let { journal_id } = useParams()
@@ -11,26 +11,31 @@ const Page = ({ pages }) => {
   }
   let [formToggle, setFormToggle] = useState(false)
   let [formState, setFormState] = useState(initialState)
+  let [isEditing, setIsEditing] = useState(false)
   let [pageNumber, setPageNumber] = useState(1)
-  let ceilingReached = pages.length > 1 ? false : true
-  let floorReached = true
+  let [ceilingReached, setCeilingReached] = useState(
+    pages.length > 1 ? false : true
+  )
+  let [floorReached, setFloorReached] = useState(true)
 
   const incrementPage = () => {
     if (pageNumber + 1 === pages.length) {
-      ceilingReached = true
+      setCeilingReached(true)
     } else {
-      ceilingReached = false
+      setCeilingReached(false)
     }
     setPageNumber(pageNumber + 1)
+    setFloorReached(false)
   }
 
   const decrementPage = () => {
-    if (pageNumber - 1 === 0) {
-      floorReached = true
+    if (pageNumber - 1 === 1) {
+      setFloorReached(true)
     } else {
-      floorReached = false
+      setFloorReached(false)
     }
     setPageNumber(pageNumber - 1)
+    setCeilingReached(false)
   }
 
   const handleChange = (e) => {
@@ -39,15 +44,37 @@ const Page = ({ pages }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const page = await CreatePage(formState)
-    pages.push(page)
-    setFormToggle(false)
-    setFormState(initialState)
+    if (isEditing) {
+      pages[pageNumber - 1] = await UpdatePage(
+        formState,
+        pages[pageNumber - 1].id
+      )
+      setFormToggle(false)
+      setFormState(initialState)
+      setIsEditing(false)
+    } else {
+      const page = await CreatePage(formState)
+      pages.push(page)
+      setFormToggle(false)
+      setFormState(initialState)
+    }
+  }
+
+  const handleEdit = () => {
+    formState.title = pages[pageNumber - 1].title
+    formState.content = pages[pageNumber - 1].content
+    setIsEditing(true)
+    setFormToggle(true)
   }
 
   return pages.length > 0 ? (
     <div>
-      <h3>{pages[pageNumber - 1].title}</h3>
+      <div className="flex-row">
+        <h3>{pages[pageNumber - 1].title}</h3>
+        <button type="button" onClick={handleEdit}>
+          Edit
+        </button>
+      </div>
       <div>{pages[pageNumber - 1].content}</div>
       <div className="flex-row page-flip">
         <button type="button" disabled={floorReached} onClick={decrementPage}>
@@ -69,7 +96,14 @@ const Page = ({ pages }) => {
             onChange={handleChange}
           />
           <label htmlFor="content">Content</label>
-          <textarea id="content" name="content" rows="4" />
+          <textarea
+            id="content"
+            name="content"
+            rows="4"
+            value={formState.content}
+            onChange={handleChange}
+          />
+          <button type="submit">Submit</button>
         </form>
       )}
       <button

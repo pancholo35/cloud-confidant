@@ -8,3 +8,12 @@ export const CreatePage = async (data) => {
     throw error
   }
 }
+
+export const UpdatePage = async (data, id) => {
+  try {
+    const res = await Client.put(`/pages/${id}`, data)
+    return res.data[1][0]
+  } catch (error) {
+    throw error
+  }
+}
