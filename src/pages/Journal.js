@@ -17,7 +17,7 @@ const Journal = ({ user }) => {
   }, [user])
 
   return (
-    <div>
+    <div className="flex-col">
       <h1>{journal && journal.title}</h1>
       {journal && <Page pages={journal.pages} />}
     </div>
