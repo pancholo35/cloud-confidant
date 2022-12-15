@@ -17,3 +17,10 @@ export const UpdatePage = async (data, id) => {
     throw error
   }
 }
+
+export const DeletePage = async (id) => {
+  try {
+    const res = await Client.delete(`/pages/${id}`)
+    return res
+  } catch (error) {}
+}

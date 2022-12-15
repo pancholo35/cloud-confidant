@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { CreatePage, UpdatePage } from '../services/PageServices'
+import { CreatePage, UpdatePage, DeletePage } from '../services/PageServices'
 
 const Page = ({ pages }) => {
   let { journal_id } = useParams()
@@ -55,16 +55,31 @@ const Page = ({ pages }) => {
     } else {
       const page = await CreatePage(formState)
       pages.push(page)
+      incrementPage()
       setFormToggle(false)
       setFormState(initialState)
     }
   }
 
   const handleEdit = () => {
-    formState.title = pages[pageNumber - 1].title
-    formState.content = pages[pageNumber - 1].content
+    if (formState.title && formState.content) {
+      formState.title = ''
+      formState.content = ''
+    } else {
+      formState.title = pages[pageNumber - 1].title
+      formState.content = pages[pageNumber - 1].content
+    }
     setIsEditing(true)
-    setFormToggle(true)
+    setFormToggle((current) => !current)
+  }
+
+  const handleDelete = async () => {
+    if (window.confirm('Delete this page?')) {
+      await DeletePage(pages[pageNumber - 1].id)
+      pages.splice(pageNumber - 1, 1)
+      decrementPage()
+      setCeilingReached(pageNumber !== pages.length)
+    }
   }
 
   return pages.length > 0 ? (
@@ -73,6 +88,9 @@ const Page = ({ pages }) => {
         <h3>{pages[pageNumber - 1].title}</h3>
         <button type="button" onClick={handleEdit}>
           Edit
+        </button>
+        <button type="button" onClick={handleDelete}>
+          Delete
         </button>
       </div>
       <div>{pages[pageNumber - 1].content}</div>
@@ -127,7 +145,14 @@ const Page = ({ pages }) => {
             onChange={handleChange}
           />
           <label htmlFor="content">Content</label>
-          <textarea id="content" name="content" rows="4" />
+          <textarea
+            id="content"
+            name="content"
+            rows="4"
+            value={formState.content}
+            onChange={handleChange}
+          />
+          <button type="submit">Submit</button>
         </form>
       )}
       <button
